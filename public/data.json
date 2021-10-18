@@ -1,0 +1,93 @@
+[
+
+    {
+       "id": 1,
+ 
+       "name":"General and preventive care",
+ 
+       "description":"A wide range for a preventive and general dentistry care. We put focus on examining root canals and the overview state of teeth’s health.",
+ 
+       "cost":8000,
+ 
+       "duration":"1h 20min",
+ 
+       "img":"https://livedemo00.template-help.com/wt_60036_v1/images/services-01-1170x550.jpg"
+ 
+    },
+ 
+    {
+       "id": 2,
+ 
+       "name":"Cosmetic solutions",
+ 
+       "description":"Our range of cosmetic dentistry solutions includes such vitals as teeth whitening as well as a laser dentistry.",
+ 
+       "cost":10000,
+ 
+       "duration":"1h 50min",
+ 
+       "img":"https://livedemo00.template-help.com/wt_60036_v1/images/services-02-1170x550.jpg"
+ 
+    },
+
+    {
+       "id": 3,
+ 
+       "name":"Restorative solutions",
+ 
+       "description":"Restoring teeth in bad condition is what we specialize in. It may include laser restoration and Invisalign service.",
+ 
+       "cost":6000,
+ 
+       "duration":"1h 30min",
+ 
+       "img":"https://livedemo00.template-help.com/wt_60036_v1/images/services-10-1170x550.jpg"
+ 
+    },
+
+    {
+       "id": 4,
+ 
+       "name":"Additional treatments",
+ 
+       "description":"People’s dentistry issues may vary. That’s why we have a lot of non-conventional treatments, including X-ray scanning.",
+ 
+       "cost":5000,
+ 
+       "duration":"1h 10min",
+ 
+       "img":"https://livedemo00.template-help.com/wt_60036_v1/images/services-13-1170x550.jpg"
+ 
+    },
+
+    {
+       "id": 5,
+ 
+       "name":"Dentures & denture repair",
+ 
+       "description":"If you need a new denture or if you’re in need of fixing your old one, broken denture – we’re at your service!",
+ 
+       "cost":12000,
+ 
+       "duration":"2h 00min",
+ 
+       "img":"https://livedemo00.template-help.com/wt_60036_v1/images/services-09-1170x550.jpg"
+ 
+    },
+
+    {
+       "id": 6,
+ 
+       "name":"Pediatric dentistry",
+ 
+       "description":"It’s crucial to check Children’s Oral Health even more often, than the adults’ teeth. That is due to baby teeth, and we know how to fix that!",
+ 
+       "cost":9000,
+ 
+       "duration":"1h 50min",
+ 
+       "img":"https://livedemo00.template-help.com/wt_60036_v1/images/services-12-1170x550.jpg"
+ 
+    }
+ 
+ ]
