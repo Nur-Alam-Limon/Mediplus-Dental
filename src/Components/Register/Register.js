@@ -1,29 +1,39 @@
 import React, { useState } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { Form } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
-import useAuth from "../../Context/useAuth";
 import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const { signInUsingGoogle } = useAuth();
-  const [error, setError] = useState("");
-
   const handleReload = (e) => {
     e.preventDefault();
   };
-
-  const handleLogin = (e) => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, pass)
+  const auth = getAuth();
+  const handleRegister = (e) => {
+    createUserWithEmailAndPassword(auth, email, pass)
       .then((result) => {
-        const user = result.user;
+        console.log(result.user);
       })
       .catch((error) => {
-        setError(error.message);
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
+    signInWithEmailAndPassword(auth, email, pass).then((result) => {
+      const user = result.user;
+      console.log(result.user);
+    });
+    updateProfile(auth.currentUser, {
+      displayName: "Jane Q. User",
+    })
+      .then(() => {})
+      .catch((error) => {});
   };
 
   const handleEmail = (e) => {
@@ -38,7 +48,7 @@ const Login = () => {
   return (
     <div>
       <div style={{ marginTop: "150px" }}></div>
-      <h1 className="mx-auto w-50">Login Form</h1>
+      <h1 className="mx-auto w-50">Registration Form</h1>
       <br />
       <Form className="w-50 mx-auto" onSubmit={handleReload}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -47,7 +57,6 @@ const Login = () => {
             onBlur={handleEmail}
             type="email"
             placeholder="Enter email"
-            required
           />
         </Form.Group>
 
@@ -57,31 +66,25 @@ const Login = () => {
             onBlur={handlePass}
             type="password"
             placeholder="Password"
-            required
           />
         </Form.Group>
         <Button
-          onClick={handleLogin}
+          onClick={handleRegister}
           className="mx-auto"
           variant="primary"
           type="submit"
         >
-          Login
+          Register
         </Button>
       </Form>
       <br />
-      <p className="text-danger text-center">{error}</p>
-      <br />
       <div className="mx-auto w-50" style={{ marginBottom: "150px" }}>
-        <button className="px-5 py-2" onClick={signInUsingGoogle}>
-          Google Sign In
-        </button>
-        <Link to="/register">
-          <p className="py-3 fs-6">New User? Register</p>
+        <Link to="/login">
+          <p className="py-3 fs-6">Already Registered? Login</p>
         </Link>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

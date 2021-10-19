@@ -1,9 +1,10 @@
 import Button from "@restart/ui/esm/Button";
 import React from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Service = (props) => {
-  const { name, description, cost, duration, img } = props.service;
+  const { name, description, cost, duration, img, id } = props.service;
   return (
     <div className="col">
       <Card
@@ -14,19 +15,21 @@ const Service = (props) => {
         <Card.Body>
           <Card.Title className="text-primary">{name}</Card.Title>
           <Card.Text>{description}</Card.Text>
-          <Button
-            style={{
-              position: "absolute",
-              bottom: "15px",
-              backgroundColor: "#0d6efd",
-              color: "white",
-              border: "none",
-              padding: "5px 10px",
-            }}
-            variant="primary"
-          >
-            Read More...
-          </Button>
+          <Link to={`services/${id}`}>
+            <Button
+              style={{
+                position: "absolute",
+                bottom: "15px",
+                backgroundColor: "#0d6efd",
+                color: "white",
+                border: "none",
+                padding: "5px 10px",
+              }}
+              variant="primary"
+            >
+              Read More...
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     </div>
