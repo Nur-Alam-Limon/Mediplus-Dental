@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
 import useAuth from "../../Context/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
@@ -10,6 +10,16 @@ const Login = () => {
   const [pass, setPass] = useState("");
   const { signInUsingGoogle } = useAuth();
   const [error, setError] = useState("");
+
+  const location = useLocation();
+  const history = useHistory();
+  const redirect_url = location.state?.from || "/home";
+
+  const handleGoogleLogin = () => {
+    signInUsingGoogle().then((result) => {
+      history.push(redirect_url);
+    });
+  };
 
   const handleReload = (e) => {
     e.preventDefault();
@@ -20,6 +30,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, pass)
       .then((result) => {
         const user = result.user;
+        history.push(redirect_url);
       })
       .catch((error) => {
         setError(error.message);
@@ -73,7 +84,7 @@ const Login = () => {
       <p className="text-danger text-center">{error}</p>
       <br />
       <div className="mx-auto w-50" style={{ marginBottom: "150px" }}>
-        <button className="px-5 py-2" onClick={signInUsingGoogle}>
+        <button className="px-5 py-2" onClick={handleGoogleLogin}>
           Google Sign In
         </button>
         <Link to="/register">

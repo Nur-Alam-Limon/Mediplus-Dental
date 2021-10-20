@@ -3,6 +3,9 @@ import React from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 
 const Contact = () => {
+  const preventLoad = (e) => {
+    e.preventDefault();
+  };
   return (
     <div style={{ height: "100vh" }}>
       <h1 className="text-center text-primary fw-bold my-5">Contact Us</h1>
@@ -28,6 +31,7 @@ const Contact = () => {
         </FloatingLabel>
 
         <Button
+          onClick={preventLoad}
           className="my-3 btn-primary border-none px-3 py-1"
           variant="primary"
           type="submit"

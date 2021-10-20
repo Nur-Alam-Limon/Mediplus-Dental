@@ -3,8 +3,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
 } from "firebase/auth";
+import { useLocation, useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
 import { Link } from "react-router-dom";
@@ -12,6 +12,12 @@ import { Link } from "react-router-dom";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [error, setError] = useState("");
+
+  const location = useLocation();
+  const history = useHistory();
+  const redirect_url = location.state?.from || "/home";
+
   const handleReload = (e) => {
     e.preventDefault();
   };
@@ -19,31 +25,28 @@ const Register = () => {
   const handleRegister = (e) => {
     createUserWithEmailAndPassword(auth, email, pass)
       .then((result) => {
-        console.log(result.user);
+        setError("");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        setError(error.message);
       });
-    signInWithEmailAndPassword(auth, email, pass).then((result) => {
-      const user = result.user;
-      console.log(result.user);
-    });
-    updateProfile(auth.currentUser, {
-      displayName: "Jane Q. User",
-    })
-      .then(() => {})
-      .catch((error) => {});
+    signInWithEmailAndPassword(auth, email, pass)
+      .then((result) => {
+        history.push(redirect_url);
+        setError("");
+        console.log(auth.currentUser);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
-    e.target.value = "";
   };
 
   const handlePass = (e) => {
     setPass(e.target.value);
-    e.target.value = "";
   };
   return (
     <div>
@@ -68,6 +71,7 @@ const Register = () => {
             placeholder="Password"
           />
         </Form.Group>
+        <p className="text-danger">{error}</p>
         <Button
           onClick={handleRegister}
           className="mx-auto"
